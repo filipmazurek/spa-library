@@ -1,6 +1,5 @@
 import csv
 from typing import List
-import matplotlib.pyplot as plt
 
 from spa.core import spa
 from spa.properties import RatioHyperproperty, ThresholdProperty
@@ -49,6 +48,14 @@ def hyperproperty_use():
     low = result.confidence_interval.low
     high = result.confidence_interval.high
 
+    # matplotlib is not a required package for SPA, but it is used here to visualize the result
+    try:
+        import matplotlib.pyplot as plt
+    except ModuleNotFoundError:  # pragma: no cover
+        print('Install "matplotlib" to visualize the result!')
+        print(f'The speedup is between {low} and {high} with {confidence * 100}% confidence.')
+        return
+
     # Plot the result using pyplot
     # Visualize the confidence intervals and true value
     fig, ax = plt.subplots()
@@ -93,6 +100,14 @@ def property_use():
 
     low = result.confidence_interval.low
     high = result.confidence_interval.high
+
+    # matplotlib is not a required package for SPA, but it is used here to visualize the result
+    try:
+        import matplotlib.pyplot as plt
+    except ModuleNotFoundError:  # pragma: no cover
+        print('Install "matplotlib" to visualize the result!')
+        print(f'The speedup is between {low} and {high} with {confidence * 100}% confidence.')
+        return
 
     # Plot the result using pyplot
     # Visualize the confidence intervals and true value
